@@ -11,14 +11,20 @@ update_lambda() {
   local varName=$2
   local version_id
   echo "zipping and uploading scripts/lambda/${lambda_filename} to S3..."
+  # Create a temporary directory to store the Lambda script's zip file
   LAMBDA_DIR=$(mktemp -d)
   cp "scripts/lambda/${lambda_filename}" "$LAMBDA_DIR"
   cd "$LAMBDA_DIR"
+  # Zip the Lambda script
   zip "${lambda_filename%.py}.zip" "${lambda_filename}"
   cd -
+  # Upload the zip file to S3
   aws s3 cp "${LAMBDA_DIR}/${lambda_filename%.py}.zip" "s3://${SCRIPTS_BUCKET}/lambda/${lambda_filename%.py}.zip"
+  # Remove the temporary directory
   rm -r "$LAMBDA_DIR"
+  # Get the latest version ID of the uploaded file in S3
   version_id=$(aws s3api list-object-versions --bucket "$SCRIPTS_BUCKET" --prefix "lambda/${lambda_filename%.py}.zip" --query 'Versions[?IsLatest].VersionId' --output text)
+  # Append the version ID to the GitHub environment file
   echo "$varName=$version_id" >> $GITHUB_ENV
 }
 
