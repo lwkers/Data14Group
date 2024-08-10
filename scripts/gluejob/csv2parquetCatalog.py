@@ -16,7 +16,7 @@ spark = glueContext.spark_session
 job = Job(glueContext)
 
 #source_bucket = "s3://data14group1-staging"
-dest_bucket = "s3://data14group1-transformed"
+dest_bucket = "s3://data14group-transformed"
 source_database = "staging"
 dest_database = "transformed"
 

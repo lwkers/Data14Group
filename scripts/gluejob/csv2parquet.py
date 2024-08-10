@@ -11,8 +11,8 @@ import os
 
 # prod
 spark = SparkSession.builder.appName("data14group1-csv2parquet").getOrCreate()
-source_bucket = "s3://data14group1-staging"
-dest_bucket = "s3://data14group1-transformed"
+source_bucket = "s3://data14group-staging"
+dest_bucket = "s3://data14group-transformed"
 
 # In[ ]:
 

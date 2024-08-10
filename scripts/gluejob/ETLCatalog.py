@@ -12,7 +12,7 @@ spark = glueContext.spark_session
 job = Job(glueContext)
 
 source_database = "transformed"
-dest_bucket = "s3://data14group1-ml"
+dest_bucket = "s3://data14group-ml"
 
 
 # define functions
