@@ -1,3 +1,5 @@
+# sets up a daily schedule to trigger a specific AWS Step Function 
+# using EventBridge
 AWSTemplateFormatVersion: '2010-09-09'
 Parameters:
   StateMachineArn:
@@ -6,6 +8,8 @@ Parameters:
 
 
 Resources:
+  # The IAM Role created (EventBridgeInvokeStepFunctionRole) grants EventBridge the necessary 
+  # permissions to start the Step Function
   EventBridgeInvokeStepFunctionRole:
     Type: AWS::IAM::Role
     Properties:
@@ -26,6 +30,7 @@ Resources:
                 Action: states:StartExecution
                 Resource: !Ref StateMachineArn
 
+  #defines a rule that triggers the Step Function daily
   EventBridgeRule:
     Type: AWS::Events::Rule
     Properties:
@@ -33,6 +38,6 @@ Resources:
       ScheduleExpression: rate(1 day)
       State: ENABLED
       Targets:
-        - Arn: !Ref StateMachineArn
+        - Arn: !Ref StateMachineArn # stepFunction.yml
           Id: "StepFunctionTarget"
           RoleArn: !GetAtt EventBridgeInvokeStepFunctionRole.Arn

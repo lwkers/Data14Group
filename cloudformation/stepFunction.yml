@@ -131,6 +131,8 @@ Resources:
         }
 
 Outputs:
+  # create a state machine arn so that eventBridge can trigger this step funcion daily
+  # used by eventBridge.yml
   StateMachineArn:
     Description: "Step Function ARN"
     Value: !GetAtt PipelineStateMachine.Arn

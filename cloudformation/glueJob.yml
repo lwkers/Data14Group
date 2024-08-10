@@ -1,3 +1,4 @@
+# glue job can only return Ref, which returns the resource name. another yaml files, like lambda can return Ref or Arn
 AWSTemplateFormatVersion: '2010-09-09'
 Parameters:
   scriptsBucket:
@@ -70,6 +71,7 @@ Resources:
                 Resource:
                   - !Ref kmsKeyForMLArn
 
+  # glue's security configurations
   GlueSecurityConfigurationForCsv2Parquet:
     Type: 'AWS::Glue::SecurityConfiguration'
     Properties:
