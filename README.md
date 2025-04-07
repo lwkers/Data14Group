@@ -1,5 +1,5 @@
 # Data14GroupOne
-machine learning scripts: [https://github.com/samrere/Data14Group1-ML](https://github.com/lwkers/Data14Group1-ML)
+machine learning scripts: [https://github.com/lwkers/Data14Group1-ML](https://github.com/lwkers/Data14Group1-ML)
 ## Standard
 ### Branching:  
 [prefix]/[ticket-number]-[task-name]  
